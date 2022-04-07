@@ -5,8 +5,8 @@ using Wrld.Space;
 using Wrld.Common.Maths;
 using Wrld.Transport;
 public class SpawnManager : MonoBehaviour
-{
-    private readonly LatLongAltitude m_inputCoords = LatLongAltitude.FromDegrees(37.784468, -122.401268, 10.0);
+{                           //37.7844696044922, 37.7844696044922
+   private readonly LatLongAltitude m_inputCoords = LatLongAltitude.FromDegrees(37.7850, -122.400, 10.0);
     [SerializeField]
     private GameObject buildingTopEnemy = null,roadEnemy;
 
@@ -33,7 +33,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnEnemiesOnBuilding();
+        // SpawnEnemiesOnBuilding();
         
     }
 
@@ -45,7 +45,7 @@ public class SpawnManager : MonoBehaviour
             LatLong temp;
             temp=LatLong.FromDegrees(float.Parse(buildingEnemies[i].buildingDegreeX),float.Parse(buildingEnemies[i].buildingDegreeY));
             GenerateEnemyOnBuilding(temp);
-            Debug.Log("Enemy Spawned");
+            Debug.Log("Enemy Spawned on Building");
         }
     }
     void GenerateEnemyOnBuilding(LatLong latLong)
@@ -70,16 +70,33 @@ public class SpawnManager : MonoBehaviour
         for(int i=0;i<roadEnemies.Length;i++)
         {
             LatLongAltitude temp;
-            temp=LatLongAltitude.FromDegrees(float.Parse(roadEnemies[i].roadDegreeX),float.Parse(roadEnemies[i].roadDegreeX),1.0f);
+                  Debug.Log("latLongAltitude for Road Enemy="+m_inputCoords);
+            temp=LatLongAltitude.FromDegrees(float.Parse(roadEnemies[i].roadDegreeX),float.Parse(roadEnemies[i].roadDegreeY),10.0f);
             GenerateEnemiesOnRoad(temp);
-            Debug.Log("Enemy Spawned");
+            Debug.Log("Enemy Spawned on Road");
         }
     }
+      GameObject m_sphereInput;
+      private TransportPositioner m_transportPositioner;
     private void GenerateEnemiesOnRoad(LatLongAltitude latLongAltitude)
     {
+
         var inputPosition = Api.Instance.SpacesApi.GeographicToWorldPoint(latLongAltitude);
+        // m_sphereInput = CreateSphere(Color.red, 2.0f);
+        // m_sphereInput.transform.localPosition = inputPosition;
+
         GameObject temp = Instantiate(roadEnemy) as GameObject;
-        temp.transform.localPosition = inputPosition;
-        Debug.Break();
+        temp.transform.localPosition =new Vector3(inputPosition.x,inputPosition.y+3f,inputPosition.z);
+        // Debug.Break();
+    }
+     private GameObject CreateSphere(Color color, float radius)
+    {
+        var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        var material = new Material(Shader.Find("Sprites/Default"));
+        material.color = color;
+        sphere.GetComponent<Renderer>().material = material;
+        sphere.transform.localScale = Vector3.one * radius;
+        sphere.transform.parent = this.transform;
+        return sphere;
     }
 }

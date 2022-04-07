@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8606358912544287795}
   m_Layer: 0
   m_Name: CannonBuilding
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,9 +238,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c283a5ee840be694f8faba3d62b5ee33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myType: 1
   shootPoint: {fileID: 9115134539143390949}
   detectionRange: 100
   maxShootDelay: 8
+  playerInRange: 0
+  checkDistance: 0
 --- !u!1001 &6637719081308373049
 PrefabInstance:
   m_ObjectHideFlags: 0

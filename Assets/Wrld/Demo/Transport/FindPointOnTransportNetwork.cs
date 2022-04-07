@@ -7,7 +7,7 @@ using Wrld.Transport;
 
 public class FindPointOnTransportNetwork : MonoBehaviour
 {
-    private readonly LatLongAltitude m_inputCoords = LatLongAltitude.FromDegrees(37.784468, -122.401268, 10.0);
+    private readonly LatLongAltitude m_inputCoords = LatLongAltitude.FromDegrees(37.7850, -122.400, 10.0); //Default Values = (37.784468, -122.401268, 10.0)
     private float m_inputHeadingDegreesA = 225.0f;
     private float m_inputHeadingDegreesB = 300.0f;
     private bool m_isHeadingA;

@@ -22,7 +22,8 @@ public class HelicopterController : MonoBehaviour
         rb=GetComponent<Rigidbody>();
     }
     void FixedUpdate()
-    {
+    { 
+        Debug.Log("Checking Player Controller Input");
         MovementUpDown();
         MovementForward();
         Turn();

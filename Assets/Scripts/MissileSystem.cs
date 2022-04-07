@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class MissileSystem : MonoBehaviour
 {
+    enum MyType
+    {
+        player,enemy,npc
+    };
+    [SerializeField]
+    MyType myType=MyType.enemy;
     [SerializeField]
     Transform shootPoint;
     [SerializeField]
     float detectionRange, maxShootDelay;
-    HelicopterController player;
+    HelicopterController target;
     float distanceToPlayer;
     [SerializeField]
     bool playerInRange,checkDistance;
@@ -16,10 +22,12 @@ public class MissileSystem : MonoBehaviour
     private void OnEnable()
     {
         // var temp;
-        player= GameObject.FindGameObjectWithTag("Player").GetComponent<HelicopterController>();
+        if(myType==MyType.enemy){
+        target= GameObject.FindGameObjectWithTag("Player").GetComponent<HelicopterController>();
+        }
         StartCoroutine(LaunchMissiles());
     }
-    void Update()
+/*  void Update()
     {
         RaycastHit hit;
 
@@ -49,13 +57,7 @@ public class MissileSystem : MonoBehaviour
                 playerInRange=true;
             }
         }
-    }
-    void OnDrawGizmosSelected()
-    {
-        // Draw a yellow sphere at the transform's position
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, detectionRange);
-    }
+    }*/
     IEnumerator LaunchMissiles()
     {
 
@@ -67,7 +69,7 @@ public class MissileSystem : MonoBehaviour
             {
                 Debug.Log("Launching Missile");
                 instance = Instantiate(Resources.Load("Missile", typeof(GameObject)),shootPoint.position,shootPoint.rotation) as GameObject;
-                instance.GetComponent<Missile>().target=player;
+                instance.GetComponent<Missile>().target=target;
             }
         }
     }
