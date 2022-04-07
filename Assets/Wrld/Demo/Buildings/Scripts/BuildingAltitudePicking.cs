@@ -9,8 +9,8 @@ public class BuildingAltitudePicking : MonoBehaviour
     private GameObject boxPrefab = null;
 
     private LatLong cameraLocation = LatLong.FromDegrees(37.795641, -122.404173);
-    private LatLong boxLocation1 = LatLong.FromDegrees(37.795159, -122.404336);
-    private LatLong boxLocation2 = LatLong.FromDegrees(37.795173, -122.404229);
+    private LatLong boxLocation1 = LatLong.FromDegrees(45.795159, -122.404336); //(37.795159, -122.404336);
+    private LatLong boxLocation2 = LatLong.FromDegrees(67.795173, -122.404229); //(37.795173, -122.404229)
 
 
     private void OnEnable()
